@@ -1,0 +1,61 @@
+@import "header";
+
+
+h1{
+	color: blue;
+}
+
+@mixin box($width,$height){
+	width: $width;
+	height: $height;
+	background: blue;
+	@media only screen and (max-width: 720px){
+		@content;
+	}
+}
+
+.draw{
+	@include box(50px, 50px);
+	@include box(200px, 50px){
+		background-color: green;
+	}
+}
+
+@mixin box2($width: 100px, $height: 100px, $color: black){
+	width: $width;
+	height: $height;
+	background: $color;
+}
+
+.draw1{
+	@include box2;
+}
+
+.draw2{
+	@include box2(200px, 200px, grey);
+}
+
+@mixin mySentence($type){
+	@if $type == green{
+		color: green;
+	}@else if $type == blue{
+		color: blue;
+	}@else {
+		color: white;
+	}
+}
+
+.p1{
+	@include mySentence(green);
+}
+
+.p2{
+	@include mySentence(blue);
+}
+
+$i: 1px;
+@for $i from 1 through 3{
+	.box-#{$i} {width: 50px*$i;
+				height:100px*$i;
+				background: gold;}
+}
